@@ -61,7 +61,7 @@ const HeatRay = struct {
     damage: u8,
 
     // We love this method:
-    pub fn zap(self: HeatRay, alien: *Alien) void {
+    pub fn  (self: HeatRay, alien: *Alien) void {
         alien.health -= if (self.damage >= alien.health) alien.health else self.damage;
     }
 };
