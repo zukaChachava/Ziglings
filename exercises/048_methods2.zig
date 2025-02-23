@@ -10,8 +10,8 @@ const Elephant = struct {
     visited: bool = false,
 
     // New Elephant methods!
-    pub fn getTail(self: *Elephant) *Elephant {
-        return self.tail.?; // Remember, this means "orelse unreachable"
+    pub fn getTail(self: *Elephant) ?*Elephant {
+        return self.tail orelse null; // Remember, this means "orelse unreachable"
     }
 
     pub fn hasTail(self: *Elephant) bool {
@@ -54,7 +54,12 @@ fn visitElephants(first_elephant: *Elephant) void {
 
         // This gets the next elephant or stops:
         // which method do we want here?
-        e = if (e.hasTail()) e.??? else break;
+        if(e.hasTail()){
+            e = e.getTail() orelse break;
+            continue;
+        }
+
+        break;
     }
 }
 
